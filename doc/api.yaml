@@ -6,6 +6,12 @@ info:
 servers:
   - url: http://localhost:3000
 
+tags:
+  - name: "List fountains"
+    description: Endpoints for listing fountains
+  - name: "Manage fountains"
+    description: Endpoint for managing fountains
+
 components:
   responses:
     BadRequest:
@@ -66,6 +72,7 @@ components:
 paths:
   /fountains/:
     get:
+      tags: ["List fountains"]
       operationId: listFountains
       summary: Get the list of available fountains
       description: |-
@@ -103,11 +110,15 @@ paths:
           content:
             application/json:
               schema:
+                description: List of fountains that matches the request
                 type: array
                 items: { $ref: "#/components/schemas/Fountain" }
+                minItems: 0
+                maxItems: 1000
         "400": { $ref: "#/components/responses/BadRequest" }
         "500": { $ref: "#/components/responses/InternalServerError" }
     post:
+      tags: ["Manage fountains"]
       operationId: createFountain
       summary: Create a new fountain
       description: |-
@@ -131,6 +142,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/FountainID"
     put:
+      tags: ["Manage fountains"]
       operationId: updateFountain
       summary: Update fountain properties
       description: |-
@@ -150,6 +162,7 @@ paths:
         "404": { description: Fountain not found }
         "500": { $ref: "#/components/responses/InternalServerError" }
     delete:
+      tags: ["Manage fountains"]
       operationId: deleteFountain
       summary: Remove a fountain
       description: Remove a fountain from the system.
