@@ -52,6 +52,9 @@ type AppDatabase interface {
 	// ListFountains returns the list of fountains with their status
 	ListFountains() ([]Fountain, error)
 
+	// ListFountainsWithFilter returns the list of fountains with their status, filtered using the specified parameters
+	ListFountainsWithFilter(latitude float64, longitude float64, filterRange float64) ([]Fountain, error)
+
 	// CreateFountain creates a new fountain in the database. It returns an updated Fountain object (with the ID)
 	CreateFountain(Fountain) (Fountain, error)
 
