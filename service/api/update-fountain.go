@@ -22,7 +22,6 @@ func (rt *_router) updateFountain(w http.ResponseWriter, r *http.Request, ps htt
 	// Read the new content for the fountain from the request body.
 	var updatedFountain Fountain
 	err = json.NewDecoder(r.Body).Decode(&updatedFountain)
-	_ = r.Body.Close()
 	if err != nil {
 		// The body was not a parseable JSON, reject it
 		w.WriteHeader(http.StatusBadRequest)
