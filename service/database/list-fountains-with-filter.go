@@ -58,7 +58,7 @@ WHERE ? <= latitude AND latitude <= ? AND ? <= longitude AND longitude <= ?`
 			ret = append(ret, f)
 		}
 	}
-	if rows.Err() != nil {
+	if err = rows.Err(); err != nil {
 		return nil, err
 	}
 

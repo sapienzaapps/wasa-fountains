@@ -20,7 +20,7 @@ func (db *appdbimpl) ListFountains() ([]Fountain, error) {
 
 		ret = append(ret, f)
 	}
-	if rows.Err() != nil {
+	if err = rows.Err(); err != nil {
 		return nil, err
 	}
 
