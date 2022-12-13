@@ -1,8 +1,8 @@
 package database
 
 func (db *appdbimpl) CreateFountain(f Fountain) (Fountain, error) {
-	res, err := db.c.Exec(`INSERT INTO fountains (id, latitude, longitude, status) VALUES (?, ?, ?, ?)`,
-		f.ID, f.Latitude, f.Longitude, f.Status)
+	res, err := db.c.Exec(`INSERT INTO fountains (id, latitude, longitude, status) VALUES (NULL, ?, ?, ?)`,
+		f.Latitude, f.Longitude, f.Status)
 	if err != nil {
 		return f, err
 	}

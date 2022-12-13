@@ -65,7 +65,13 @@ func (rt *_router) listFountains(w http.ResponseWriter, r *http.Request, ps http
 		return
 	}
 
+	// Before sending the list to the client we need to convert it to the "frontend" type
+	var frontendFountains = make([]Fountain, len(fountains))
+	for idx := range fountains {
+		frontendFountains[idx].FromDatabase(fountains[idx])
+	}
+
 	// Send the list to the user.
 	w.Header().Set("Content-Type", "application/json")
-	_ = json.NewEncoder(w).Encode(fountains)
+	_ = json.NewEncoder(w).Encode(frontendFountains)
 }
